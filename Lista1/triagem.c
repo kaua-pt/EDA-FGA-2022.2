@@ -19,9 +19,9 @@ int main()
             i = 0;
             if (flag >= 2)
             {
-                flag = 0;
                 triagem++;
             }
+            flag = 0;
         }
     }
 
