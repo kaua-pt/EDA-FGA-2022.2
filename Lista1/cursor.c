@@ -4,7 +4,7 @@ int encontrarUltimoChar(char *matrix)
 {
     int i, contador = 0;
 
-    for (i = 0; i < 1000; i++)
+    for (i = 0; i < 1001; i++)
     {
         if (matrix[i] != '\0')
         {

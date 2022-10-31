@@ -49,13 +49,13 @@ int **criarMatriz(char vet[1000][11], char lados[501], int ladosPos[501], int ga
 
     if (initial == 'D')
     {
-        vet[2][0] = 'L';
-        vet[2][1] = 'L';
+        vet[2][4] = 'L';
+        vet[2][5] = 'L';
     }
     if (initial == 'E')
     {
-        vet[8][0] = 'L';
-        vet[8][1] = 'L';
+        vet[8][5] = 'L';
+        vet[8][4] = 'L';
     }
 
     for (l = 0; l < 5; l++)
