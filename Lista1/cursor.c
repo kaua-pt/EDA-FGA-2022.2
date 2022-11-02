@@ -4,7 +4,7 @@ int encontrarUltimoChar(char *matrix)
 {
     int i, contador = 0;
 
-    for (i = 0; i < 1001; i++)
+    for (i = 0; i < 1004; i++)
     {
         if (matrix[i] != '\0')
         {
@@ -19,37 +19,34 @@ int encontrarUltimoChar(char *matrix)
 
 int main()
 {
-    int linhas, colunaI, linhaI, k, i, j, resultL, resultC, helperF;
+    int linhas, colunaI, linhaI, k, resultL, resultC, helperF;
     char x;
-    char matrix[1001][1001];
+    char matrix[1004][1004];
     scanf("%d", &linhas);
 
     for (k = 1; k <= linhas; k++)
     {
-        scanf(" %[^\n]s", matrix[k]);
+        scanf(" %1000[^\n]s", matrix[k]);
     }
 
     scanf("%d %d", &linhaI, &colunaI);
     resultL = linhaI;
     resultC = colunaI;
 
-    scanf("%c", &x);
-
     while (scanf("\n%c", &x) != EOF)
     {
 
         if (x == 'j')
         {
-            if ((resultL + 1) > linhas)
-            {
-            }
-            else
+            if ((resultL + 1) <= linhas)
             {
                 resultL = resultL + 1;
 
                 helperF = encontrarUltimoChar(matrix[resultL]);
 
-                if (resultC >= helperF)
+                //  5      >    8
+
+                if ((resultC > helperF) || (resultC < helperF && helperF < colunaI))
                 {
                     resultC = helperF;
                 }
@@ -63,17 +60,13 @@ int main()
         if (x == 'k')
         {
 
-            if (resultL <= 1)
-            {
-                resultL = 1;
-            }
-            else
+            if (resultL > 1)
             {
                 resultL = resultL - 1;
 
                 helperF = encontrarUltimoChar(matrix[resultL]);
 
-                if (resultC >= helperF)
+                if (resultC > helperF || (resultC < helperF && helperF < colunaI))
                 {
                     resultC = helperF;
                 }
@@ -83,10 +76,7 @@ int main()
                 }
             }
         }
-
-        printf("%d ", resultL);
-        printf("%d ", resultC);
-        printf("%c\n", matrix[resultL][resultC - 1]);
+        printf("%d %d %c\n", resultL, resultC, matrix[resultL][resultC - 1]);
     }
 
     return 0;

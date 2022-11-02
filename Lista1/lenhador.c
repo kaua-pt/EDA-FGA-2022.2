@@ -1,84 +1,27 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdio.h>
 
-// numero da entrada 5<= L <=1000
-// galhos na arvore 2<= G <= l/2
-// G linhas com posicao + altura como char e int
-// posicao onde começa em char
-// string entre  1 <= C <= 2000 com os comandos
+char lado;
+char matrix[1004][14];
+int ladosPos[501];
+char lados[501];
+int rodadas, galhos;
+int coef = 0;
 
-// T troca, B bate
-
-int **criarMatriz(char vet[1000][11], char lados[501], int ladosPos[501], int galhos, char initial)
-{
-    int i, j, k, l, z, p, o;
-
-    for (i = 0; i < 11; i++)
-    {
-        for (j = 0; j < 1000; j++)
-        {
-            if ((j == 4) || (j == 5) || (j == 6))
-            {
-                vet[j][i] = '|';
-            }
-            else
-            {
-                vet[j][i] = ' ';
-            }
-            for (z = 0; z < 501; z++)
-            {
-                int pos = ladosPos[z];
-
-                if (lados[z] == 'D')
-                {
-                    for (p = 8; p < 11; p++)
-                    {
-                        vet[p][pos] = '-';
-                    }
-                }
-                if (lados[z] == 'E')
-                {
-                    for (p = 1; p < 4; p++)
-                    {
-                        vet[p][pos] = '-';
-                    }
-                }
-            }
-        }
-    }
-
-    if (initial == 'D')
-    {
-        vet[2][4] = 'L';
-        vet[2][5] = 'L';
-    }
-    if (initial == 'E')
-    {
-        vet[8][5] = 'L';
-        vet[8][4] = 'L';
-    }
-
-    for (l = 0; l < 5; l++)
-    {
-        for (k = 0; k < 11; k++)
-        {
-            printf(" %c", vet[k][l]);
-        }
-        printf("\n");
-    }
-    printf("_______________________");
-}
+int criarTronco();
+int verificarGalhos();
+int posicionarLenhador();
+int bater();
+int verificarMorte();
+int trocarLado();
+void printTronco();
 
 int main()
 {
-    int i, j;
-    int rodadas, galhos;
-    char inicial, aux;
-    int ladosPos[501];
-    char stringAux[5];
-    char lados[501];
-    char comando[2000];
-    char matrix[1000][11];
+    int i, j, help;
+    char aux;
+    char comando[2001];
 
     scanf("%d", &rodadas);
     scanf("%d", &galhos);
@@ -90,13 +33,181 @@ int main()
         lados[i] = aux;
     }
 
-    scanf(" %c", &inicial);
+    scanf(" %c", &lado);
     scanf("%s", comando);
-
-    for (j = 0; j < 1; j++)
+    // criando tronco;
+    criarTronco();
+    verificarGalhos();
+    posicionarLenhador();
+    printTronco();
+    // jogar
+    for (j = 0; j < strlen(comando); j++)
     {
-        criarMatriz(matrix, lados, ladosPos, galhos, inicial);
+        if (comando[j] == 'T')
+        {
+            if (trocarLado())
+            {
+                break;
+            }
+            printTronco();
+        }
+        if (comando[j] == 'B')
+        {
+            help = bater();
+            if (help == 1)
+            {
+                break;
+            }
+            printTronco();
+        }
     }
 
     return 0;
+}
+
+verificarMorte() // usado
+{
+    if (lado == 'E' && matrix[coef + 2][2] == '-' && matrix[coef][4] == '>')
+    {
+        return 1;
+    }
+    if (lado == 'D' && matrix[coef + 2][8] == '-' && matrix[coef][6] == '<')
+    {
+        return 1;
+    }
+    return 0;
+}
+
+trocarLado() // usado
+{
+    if (lado == 'D')
+    {
+        if (matrix[coef][2] == '-' || matrix[coef + 1][2] == '-')
+        {
+            printf("**beep**\n");
+            return 1;
+        }
+        matrix[coef][2] = 'L';
+        matrix[coef + 1][2] = 'L';
+        matrix[coef][8] = ' ';
+        matrix[coef + 1][8] = ' ';
+        lado = 'E';
+        return 0;
+    }
+    if (lado == 'E')
+    {
+        if (matrix[coef][8] == '-' || matrix[coef + 1][8] == '-')
+        {
+            printf("**beep**\n");
+            return 1;
+        }
+
+        matrix[coef][2] = ' ';
+        matrix[coef + 1][2] = ' ';
+        matrix[coef][8] = 'L';
+        matrix[coef + 1][8] = 'L';
+        lado = 'D';
+        return 0;
+    }
+}
+
+posicionarLenhador() // usado
+{
+
+    if (lado == 'D')
+    {
+        matrix[coef][8] = 'L';
+        matrix[coef + 1][8] = 'L';
+    }
+    if (lado == 'E')
+    {
+        matrix[coef][2] = 'L';
+        matrix[coef + 1][2] = 'L';
+    }
+}
+
+verificarGalhos() // usado
+{
+    int i, j;
+    for (i = 0; i < galhos; i++)
+    {
+        j = ladosPos[i] - 1;
+        if (lados[i] == 'D')
+        {
+            matrix[j][8] = '-';
+            matrix[j][9] = '-';
+            matrix[j][10] = '-';
+        }
+        if (lados[i] == 'E')
+        {
+            matrix[j][1] = '-';
+            matrix[j][2] = '-';
+            matrix[j][3] = '-';
+        }
+    }
+}
+
+criarTronco() // usado
+{
+    int i, j, numLoop;
+
+    for (i = 0; i < rodadas; i++)
+    {
+        for (j = 0; j < 11; j++)
+        {
+            if (j == 4 || j == 5 || j == 6)
+            {
+                matrix[i][j] = '|';
+            }
+            else
+            {
+                matrix[i][j] = ' ';
+            }
+        }
+    }
+}
+
+bater() // usado
+{
+    if (verificarMorte())
+    {
+        printf("**morreu**\n");
+        return 1;
+    }
+
+    if ((matrix[coef][4] == '>' && lado == 'E') || (matrix[coef][6] == '<' && lado == 'D'))
+    {
+        coef++;
+        posicionarLenhador();
+        return 0;
+    }
+
+    if (matrix[coef][4] == '|' && lado == 'E')
+    {
+        matrix[coef][4] = '>';
+        return 0;
+    }
+
+    if (matrix[coef][6] == '|' && lado == 'D')
+    {
+        matrix[coef][6] = '<';
+        return 0;
+    }
+}
+
+void printTronco() // usado
+{
+    int i, j;
+
+    printf("~~~~~~~~~~~\n");
+
+    for (i = 4 + coef; i >= coef; i--)
+    {
+        for (j = 0; j < 11; j++)
+        {
+            printf("%c", matrix[i][j]);
+        }
+        printf("\n");
+    }
+    printf("~~~~~~~~~~~\n");
 }
