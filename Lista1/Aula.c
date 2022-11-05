@@ -33,3 +33,11 @@ int main()
     printf("%d", *c);
     return 0;
 }
+
+// malloc(sizet), aloca memoria no computador, retorna null se nao der
+// calloc(sizet), aloca memoria no computador, retorna null se nao der e inicia os valores como 0
+// realloc(prt,sizet), realoca a memoria em um outro local no pc, retorna o novo ponteiro
+// free(prt), desaloca memoria.
+
+// complexidade de espaço - variaveis
+// complexidade de tempo - operações elementares

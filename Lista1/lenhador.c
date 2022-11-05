@@ -65,7 +65,7 @@ int main()
     return 0;
 }
 
-verificarMorte() // usado
+verificarMorte()
 {
     if (lado == 'E' && matrix[coef + 2][2] == '-' && matrix[coef][4] == '>')
     {
@@ -78,7 +78,7 @@ verificarMorte() // usado
     return 0;
 }
 
-trocarLado() // usado
+trocarLado()
 {
     if (lado == 'D')
     {
@@ -111,7 +111,7 @@ trocarLado() // usado
     }
 }
 
-posicionarLenhador() // usado
+posicionarLenhador()
 {
 
     if (lado == 'D')
@@ -126,7 +126,7 @@ posicionarLenhador() // usado
     }
 }
 
-verificarGalhos() // usado
+verificarGalhos()
 {
     int i, j;
     for (i = 0; i < galhos; i++)
@@ -147,7 +147,7 @@ verificarGalhos() // usado
     }
 }
 
-criarTronco() // usado
+criarTronco()
 {
     int i, j, numLoop;
 
@@ -167,7 +167,7 @@ criarTronco() // usado
     }
 }
 
-bater() // usado
+bater()
 {
     if (verificarMorte())
     {
@@ -195,7 +195,7 @@ bater() // usado
     }
 }
 
-void printTronco() // usado
+void printTronco()
 {
     int i, j;
 
