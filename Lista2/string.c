@@ -1,24 +1,22 @@
 #include <stdio.h>
-#include <string.h>
-
-// 8 algos
-// matrix dinamica
-// 1000 linhas
-// short dentro da matriz
 
 int main()
 {
-    int i = 0, j = 0;
-    char v[1000][1000];
-    short *run;
+    int input;
 
-    while (scanf("%s", v[i][j]) != EOF)
+    while (scanf("%x", &input) != EOF)
     {
-        if (v[i][j] == '\0')
+        int a;
+        char *prt = &input;
+
+        for (a = 0; a < 4; a++)
         {
-            j++;
+            if (prt[a] == 0)
+            {
+                printf("\n");
+                return 0;
+            }
+            printf("%c", (char)prt[a]);
         }
     }
-
-    return 0;
 }
