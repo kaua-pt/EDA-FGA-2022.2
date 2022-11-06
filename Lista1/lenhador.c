@@ -154,13 +154,20 @@ criarTronco()
 {
     int i, j, numLoop;
 
-    for (i = 0; i < rodadas; i++)
+    for (i = 0; i < rodadas + 5; i++)
     {
         for (j = 0; j < 11; j++)
         {
-            if (j == 4 || j == 5 || j == 6)
+            if (i < rodadas)
             {
-                matrix[i][j] = '|';
+                if (j == 4 || j == 5 || j == 6)
+                {
+                    matrix[i][j] = '|';
+                }
+                else
+                {
+                    matrix[i][j] = ' ';
+                }
             }
             else
             {
