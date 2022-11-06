@@ -3,7 +3,7 @@
 #include <stdio.h>
 
 char lado;
-char matrix[1004][14];
+char matrix[1005][14];
 int ladosPos[501];
 char lados[501];
 int rodadas, galhos;
@@ -47,9 +47,12 @@ int main()
         {
             if (trocarLado())
             {
-                break;
+                continue;
             }
-            printTronco();
+            else
+            {
+                printTronco();
+            }
         }
         if (comando[j] == 'B')
         {
