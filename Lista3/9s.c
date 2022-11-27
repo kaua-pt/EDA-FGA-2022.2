@@ -15,15 +15,34 @@ int computarDigitos(char input[1001], int soma)
     }
 }
 
-int saberDigitos(int num)
+int somar_int(int num, int soma)
 {
-    int i = 0;
-    while (num > 0)
+    if (num < 1)
     {
-        i++;
-        num /= 10;
+        return soma;
     }
-    return i;
+    int resto = num % 10;
+    soma = soma + resto;
+    return somar_int(num / 10, soma);
+}
+
+int saberDegree(int soma, int degree)
+{
+    if (soma < 9)
+    {
+        return degree;
+    }
+    else if (soma == 9)
+    {
+        degree++;
+        return degree;
+    }
+    else
+    {
+        degree++;
+        soma = somar_int(soma, 0);
+        return saberDegree(soma, degree);
+    }
 }
 
 int main()
@@ -37,8 +56,7 @@ int main()
             break;
 
         result = computarDigitos(input, 0);
-        printf("result = %d\n", result);
-        len = saberDigitos(result);
+        len = saberDegree(result, 0);
 
         if (result % 9 == 0)
         {
