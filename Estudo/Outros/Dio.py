@@ -31,9 +31,12 @@ def solve(a, b, c):
                 break
 
     mux = c / mdc
+    r3 = array_x[round(len(array_x)/2)-1]
+    r4 = array_y[round(len(array_x)/2)-1]
+    print(r3)
     print("Assim, encontramos a seguinte solução particular :")
-    print("Xo = " + str(r1*mux) + " + " + str(a/mdc) + " T")
-    print("Y0 = " + str(r2*mux) + " + " + str(b/mdc) + " T")
+    print("Xo = " + str(r3*mux) + " + " + str(a/mdc) + " T")
+    print("Y0 = " + str(r4*mux) + " + " + str(b/mdc) + " T")
 
     plt.plot(array_x, array_y, color='orange', marker='o')
     plt.xlabel("X")
