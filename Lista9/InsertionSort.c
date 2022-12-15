@@ -9,7 +9,7 @@
 
 int main()
 {
-    int vetor[50000], i = 0, j, k, p, l, h, minor, aux;
+    int vetor[50000], i = 0, j, k,l, minor, aux;
 
     while (scanf("%d", &vetor[i]) != EOF)
         i++;
@@ -25,21 +25,21 @@ int main()
     EXC(vetor[0], vetor[minor]);
 
     // pegar na mao
-    for (k = 2; k <= i; k++)
+    for (k = 2; k < i; ++k)
     {
         int u = k;
-        aux = vetor[k];
+        aux = vetor[u];
 
         while (aux <= vetor[u - 1])
         {
             vetor[u] = vetor[u - 1];
-            u--;
+            --u;
         }
         vetor[u] = aux;
     }
 
-    for (l = 1; l <= i; l++)
+    for (l = 0; l < i; l++)
     {
-        printf("%d ", vetor[l]);
+        printf("%d%s", vetor[l], l == i - 1 ? "\n" : " ");
     }
 }

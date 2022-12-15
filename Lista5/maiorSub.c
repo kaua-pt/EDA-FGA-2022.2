@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <string.h>
 
+// Não está correto
+
 char input[101], sub[101];
 
 int checkFinal(int place, int len, int leninp)
