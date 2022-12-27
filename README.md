@@ -4,7 +4,15 @@
 
 Este repositório é dedicado as listas de EDA1 do semestre 2022.2 do professor Bruno Cesar Ribas
 
-## :hammer: Tecnologias
+## :orange_book: Conteudo :
+
+  - Básico de C
+  - Recursividade
+  - Algoritmos de ordenação
+  - Tipos de dados : Pilhas, listas, etc
+  - Tabela Hash
+
+## :hammer: Tecnologia
 
 Tecnologia utilizada neste repositório: 
 
